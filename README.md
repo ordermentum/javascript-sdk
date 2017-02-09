@@ -1,12 +1,22 @@
-# Javascript SDK for Ordermentum API
+# Ordermentum Node.js SDK
+
+Node.js SDK for the Ordermentum
 
 ### Getting started
 
-```javascript
-import Client from 'ordermentum-js';
+```bash
+curl \
+  -X POST \
+  -d username=example@example.com \
+  -d password=secret \
+  -d grant_type=password \
+  "https://app.ordermentum.com/v1/auth"
+```
 
-const client = Client({
-  base: 'https://app.ordermentum.com',
+```javascript
+import createClient from 'ordermentum';
+
+const client = createClient({
   token: '[TOKEN]',
 });
 ```
@@ -14,7 +24,7 @@ const client = Client({
 ### Products
 
 ```javascript
-const products = client.products.search({ });
+const products = client.products.findAll({ supplierId: '' });
 
 const response = client.products.create({
 
@@ -24,7 +34,7 @@ const response = client.products.create({
 ### Orders
 
 ```javascript
-const orders = client.orders.search({ });
+const orders = client.orders.findAll({ supplierId: '' });
 
 const response = client.orders.update(id, {
 
@@ -34,7 +44,7 @@ const response = client.orders.update(id, {
 ### Invoices
 
 ```javascript
-const invoices = client.invoices.search({ });
+const invoices = client.invoices.findAll({ supplierId: '' });
 
 const response = client.invoices.update(id, {
 
