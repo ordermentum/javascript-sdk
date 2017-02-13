@@ -14,7 +14,7 @@ curl \
 ```
 
 ```javascript
-import createClient from 'ordermentum';
+import createClient from 'ordermentum-sdk';
 
 const client = createClient({
   token: '[TOKEN]',
