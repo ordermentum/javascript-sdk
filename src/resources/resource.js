@@ -1,4 +1,5 @@
 import url from 'url';
+import Iterator from '../iterator';
 
 export default function resource(path) {
   const defaultFilter = {
@@ -12,9 +13,14 @@ export default function resource(path) {
       client,
       defaultFilter,
 
-      findAll(query = {}) {
+      findAll(query = {}, { iterator = false } = {}) {
         const q = Object.assign({}, defaultFilter, query);
         client.logger.trace('findAll', { path, query: q });
+
+        if (iterator) {
+          return new Iterator(this.client, this.path, query).values();
+        }
+
         return client.get(this.path, { query: q });
       },
       findOne(id) {
