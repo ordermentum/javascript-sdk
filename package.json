@@ -1,6 +1,6 @@
 {
   "name": "ordermentum-sdk",
-  "version": "0.1.11",
+  "version": "0.1.14",
   "main": "lib/index.js",
   "repository": "git@github.com:ordermentum/javascript-sdk.git",
   "author": "John D'Agostino <john.dagostino@gmail.com>",
