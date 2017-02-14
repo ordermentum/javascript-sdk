@@ -1,7 +1,7 @@
 
 
 export default class Iterator {
-  constructor(cilent, resource, params) {
+  constructor(client, resource, params) {
     this.client = client;
     this.resource = resource;
     this.params = params;
