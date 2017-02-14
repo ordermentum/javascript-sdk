@@ -25,22 +25,27 @@ export default class Client {
   }
 
   get(...args) {
-    return this.instance.get(...args);
+    return this.instance.get(...args)
+    .then(r => r.data);
   }
 
   post(...args) {
-    return this.instance.post(...args);
+    return this.instance.post(...args)
+    .then(r => r.data);
   }
 
   patch(...args) {
-    return this.instance.patch(...args);
+    return this.instance.patch(...args)
+    .then(r => r.data);
   }
 
   put(...args) {
-    return this.instance.put(...args);
+    return this.instance.put(...args)
+    .then(r => r.data);
   }
 
   delete(...args) {
-    return this.instance.delete(...args);
+    return this.instance.delete(...args)
+    .then(r => r.data);
   }
 }
