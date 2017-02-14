@@ -19,7 +19,7 @@ export default function resource(path) {
       },
       findOne(id) {
         client.logger.trace('findOne', { path: this.path, id });
-        return client.get(url.resolve(path, `/${id}`));
+        return client.get(url.resolve(this.path, `/${id}`));
       },
 
       get: (...args) => this.findOne(...args),
@@ -30,7 +30,7 @@ export default function resource(path) {
       },
       update(id, params = {}) {
         client.logger.trace('update', { path: this.path, id, params });
-        return client.put(url.resolve(path, `/${id}`), { body: params });
+        return client.put(url.resolve(this.path, `/${id}`), { body: params });
       },
     }
   );
