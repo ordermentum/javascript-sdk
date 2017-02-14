@@ -15,7 +15,7 @@ export default function resource(path) {
       findAll(query = {}) {
         const q = Object.assign({}, defaultFilter, query);
         client.logger.trace('findAll', { path: this.path, query: q });
-        return client.get(this.path, { query: q });
+        return client.get(this.path, { params: q });
       },
       findOne(id) {
         client.logger.trace('findOne', { path: this.path, id });
@@ -26,11 +26,11 @@ export default function resource(path) {
 
       create(params = {}) {
         client.logger.trace('create', { path: this.path, params });
-        return client.post(this.path, { body: params });
+        return client.post(this.path, params);
       },
       update(id, params = {}) {
         client.logger.trace('update', { path: this.path, id, params });
-        return client.put(url.resolve(this.path, `/${id}`), { body: params });
+        return client.put(url.resolve(this.path, `/${id}`), params);
       },
     }
   );
