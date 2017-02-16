@@ -9,7 +9,9 @@
     "axios": "^0.15.3",
     "babel-runtime": "^6.22.0"
   },
-  "files": ["lib/*"],
+  "files": [
+    "lib/*"
+  ],
   "scripts": {
     "test": "NODE_ENV=test nyc npm run spec",
     "spec": "./node_modules/.bin/_mocha -R spec ./test/test_helper.js --compilers js:babel-core/register --recursive test/**/*",
