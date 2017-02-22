@@ -8,6 +8,7 @@ const resources = {
   retailers: resource('/v1/retailers'),
   suppliers: resource('/v1/suppliers'),
   webhooks: resource('/v1/webhooks'),
+  categories: resource('/v1/categories'),
 };
 
 export default resources;
