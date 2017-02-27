@@ -8,15 +8,27 @@ function createClient({ apiBase = 'https://app.ordermentum.com', timeout = 3000,
 
   logger.info({ token, apiBase, timeout });
 
+  const {
+    orders,
+    purchasers,
+    products,
+    categories,
+    webhooks,
+    invoices,
+    suppliers,
+    retailers,
+  } = resources(client);
+
   return {
     client,
-    products: resources.products(client),
-    retailers: resources.retailers(client),
-    purchasers: resources.purchasers(client),
-    suppliers: resources.suppliers(client),
-    orders: resources.orders(client),
-    invoices: resources.invoices(client),
-    webhooks: resources.webhooks(client),
+    invoices,
+    orders,
+    purchasers,
+    products,
+    retailers,
+    suppliers,
+    webhooks,
+    categories,
   };
 }
 
