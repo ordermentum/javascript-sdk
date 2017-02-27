@@ -42,6 +42,11 @@ export default function resource(path) {
         return client.post(this.path, params);
       },
 
+      destroy(id) {
+        client.logger.trace('destory', { path: this.path, id });
+        return client.delete(this.path, id);
+      },
+
       update(id, params = {}) {
         client.logger.trace('update', { path: this.path, id, params });
         return client.put(`${this.path}/${id}`, params);
