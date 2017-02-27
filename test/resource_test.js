@@ -28,14 +28,26 @@ describe('resource', () => {
     getStub.restore();
   });
 
-  it('findOne', async () => {
-    const cat = { name: 'droppo' };
-    const getStub = sinon.stub(FAKE_CLIENT, 'get')
-                         .returns(new Promise(resolve => resolve({ data: [cat] })));
-    const response = await cats.findOne({ species: 'tiger' });
-    expect(getStub.called).to.be.equal(true);
-    expect(response).to.deep.equal(cat);
-    getStub.restore();
+  describe('findOne', () => {
+
+    it('returns a single item', async () => {
+      const cat = { name: 'droppo' };
+      const getStub = sinon.stub(FAKE_CLIENT, 'get')
+                          .returns(new Promise(resolve => resolve({ data: [cat] })));
+      const response = await cats.findOne({ species: 'tiger' });
+      expect(getStub.called).to.be.equal(true);
+      expect(response).to.deep.equal(cat);
+      getStub.restore();
+    });
+
+    it('returns null if no item returned', async () => {
+      const getStub = sinon.stub(FAKE_CLIENT, 'get')
+                          .returns(new Promise(resolve => resolve({ data: [] })));
+      const response = await cats.findOne({ species: 'tiger' });
+      expect(getStub.called).to.be.equal(true);
+      expect(response).to.equal(null);
+      getStub.restore();
+    });
   });
 
   it('create', async () => {

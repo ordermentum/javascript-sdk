@@ -1,4 +1,12 @@
-import url from 'url';
+
+
+function singleResource(response) {
+  if (Array.isArray(response.data) && response.data.length > 0) {
+    return response.data[0];
+  }
+
+  return null;
+}
 
 export default function resource(path) {
   const defaultFilter = {
@@ -27,7 +35,7 @@ export default function resource(path) {
 
         client.logger.trace('findOne', { path: this.path, params });
         return client.get(this.path, { params })
-                     .then(response => response.data[0]);
+                     .then(singleResource);
       },
 
       findById(id) {
