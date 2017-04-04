@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 
 const pack = require('../package');
 
@@ -16,6 +17,9 @@ export default class Client {
     return this.adapter.create({
       baseURL: this.apiBase,
       timeout: this.timeout,
+      paramsSerializer: params => (
+        qs.stringify(params)
+      ),
       responseType: 'json',
       headers: {
         'User-Agent': `Ordermentum Client ${pack.version}`,
