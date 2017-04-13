@@ -21,6 +21,7 @@ function createClient({
     webhooks,
     invoices,
     suppliers,
+    visibilityGroups,
     retailers,
   } = resources(client);
 
@@ -31,6 +32,7 @@ function createClient({
     purchasers,
     products,
     retailers,
+    visibilityGroups,
     suppliers,
     webhooks,
     categories,
