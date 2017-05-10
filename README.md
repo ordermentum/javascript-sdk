@@ -1,5 +1,7 @@
 # Ordermentum Node.js SDK
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ordermentum/javascript-sdk.svg)](https://greenkeeper.io/)
+
 Node.js SDK for the Ordermentum
 
 ### Getting started
