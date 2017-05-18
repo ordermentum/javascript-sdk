@@ -51,8 +51,8 @@ export default function resource(path) {
       },
 
       destroy(id) {
-        client.logger.trace('destory', { path: this.path, id });
-        return client.delete(this.path, id);
+        client.logger.trace('destroy', { path: this.path, id });
+        return client.delete(`${this.path}/${id}`);
       },
 
       update(id, params = {}) {
