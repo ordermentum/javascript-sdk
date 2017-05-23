@@ -23,6 +23,7 @@ function createClient({
     suppliers,
     visibilityGroups,
     retailers,
+    integrations,
   } = resources(client);
 
   return {
@@ -36,6 +37,7 @@ function createClient({
     suppliers,
     webhooks,
     categories,
+    integrations,
   };
 }
 

@@ -11,6 +11,7 @@ const resources = client => ({
   priceGroups: resource('/v1/price-groups')(client),
   schedules: resource('/v1/schedules')(client),
   webhooks: resource('/v1/webhooks')(client),
+  integrations: resource('/v1/integrations')(client),
   categories: resource('/v1/categories')(client),
 });
 
