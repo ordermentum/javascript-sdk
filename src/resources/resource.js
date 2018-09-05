@@ -1,4 +1,12 @@
-import url from 'url';
+
+
+function singleResource(response) {
+  if (Array.isArray(response.data) && response.data.length > 0) {
+    return response.data[0];
+  }
+
+  return null;
+}
 
 export default function resource(path) {
   const defaultFilter = {
@@ -13,24 +21,43 @@ export default function resource(path) {
       defaultFilter,
 
       findAll(query = {}) {
-        const q = Object.assign({}, defaultFilter, query);
-        client.logger.trace('findAll', { path, query: q });
-        return client.get(this.path, { query: q });
-      },
-      findOne(id) {
-        client.logger.trace('findOne', { path, id });
-        return client.get(url.resolve(path `/${id}`));
+        const params = Object.assign({}, defaultFilter, query);
+        client.logger.trace('findAll', { path: this.path, params });
+
+        return client.get(this.path, { params });
       },
 
-      get: (...args) => this.findOne(...args),
+      findOne(query = {}) {
+        const params = Object.assign({}, {
+          pageSize: 1,
+          pageNo: 1,
+        }, query);
+
+        client.logger.trace('findOne', { path: this.path, params });
+        return client.get(this.path, { params })
+                     .then(singleResource);
+      },
+
+      findById(id) {
+        client.logger.trace('findById', { path: this.path, id });
+        return client.get(`${this.path}/${id}`);
+      },
+
+      get(...args) { return this.findbyId(...args); },
 
       create(params = {}) {
-        client.logger.trace('create', { path, params });
-        return client.post(this.path, { body: params });
+        client.logger.trace('create', { path: this.path, params });
+        return client.post(this.path, params);
       },
+
+      destroy(id) {
+        client.logger.trace('destroy', { path: this.path, id });
+        return client.delete(`${this.path}/${id}`);
+      },
+
       update(id, params = {}) {
-        client.logger.trace('update', { path, id, params });
-        return client.put(url.resolve(path `/${id}`), { body: params });
+        client.logger.trace('update', { path: this.path, id, params });
+        return client.put(`${this.path}/${id}`, params);
       },
     }
   );

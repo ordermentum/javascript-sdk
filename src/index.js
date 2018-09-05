@@ -1,21 +1,43 @@
-import Client from './client';
-import NULL_LOGGER from './logger';
+import NULL_LOGGER from 'null-logger';
 
+import Client from './client';
 import resources from './resources';
 
-function createClient({ apiBase = 'https://app.ordermentum.com', timeout = 3000, token, logger = NULL_LOGGER }) {
+function createClient({
+  apiBase = 'https://app.ordermentum.com',
+  timeout = 3000,
+  token,
+  logger = NULL_LOGGER,
+}) {
   const client = new Client({ token, apiBase, timeout, logger });
 
   logger.info({ token, apiBase, timeout });
 
+  const {
+    orders,
+    purchasers,
+    products,
+    categories,
+    webhooks,
+    invoices,
+    suppliers,
+    visibilityGroups,
+    retailers,
+    integrations,
+  } = resources(client);
+
   return {
     client,
-    products: resources.products(client),
-    retailers: resources.retailers(client),
-    purchasers: resources.purchasers(client),
-    suppliers: resources.suppliers(client),
-    orders: resources.orders(client),
-    invoices: resources.invoices(client),
+    invoices,
+    orders,
+    purchasers,
+    products,
+    retailers,
+    visibilityGroups,
+    suppliers,
+    webhooks,
+    categories,
+    integrations,
   };
 }
 

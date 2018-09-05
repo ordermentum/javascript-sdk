@@ -1,14 +1,19 @@
 {
-  "name": "ordermentum",
-  "version": "0.1.6",
-  "main": "index.js",
+  "name": "ordermentum-sdk",
+  "version": "0.2.12",
+  "main": "lib/index.js",
   "repository": "git@github.com:ordermentum/javascript-sdk.git",
   "author": "John D'Agostino <john.dagostino@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
-    "babel-runtime": "^6.22.0"
+    "babel-runtime": "^6.22.0",
+    "null-logger": "^1.0.0",
+    "qs": "^6.4.0"
   },
+  "files": [
+    "lib/*"
+  ],
   "scripts": {
     "test": "NODE_ENV=test nyc npm run spec",
     "spec": "./node_modules/.bin/_mocha -R spec ./test/test_helper.js --compilers js:babel-core/register --recursive test/**/*",
