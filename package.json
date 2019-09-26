@@ -6,8 +6,7 @@
   "author": "John D'Agostino <john.dagostino@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.15.3",
-    "babel-runtime": "^6.22.0",
+    "axios": "^0.19.0",
     "null-logger": "^1.0.0",
     "qs": "^6.4.0"
   },
@@ -15,11 +14,10 @@
     "lib/*"
   ],
   "scripts": {
-    "test": "NODE_ENV=test nyc npm run spec",
-    "spec": "./node_modules/.bin/_mocha -R spec ./test/test_helper.js --reporter spec test/*_test.ts",
+    "test": "cross-env NODE_ENV=test nyc npm run spec",
+    "spec": "mocha -R spec ./test/test_helper.js test/*.*",
     "lint": "./node_modules/.bin/eslint src test",
     "typecheck": "tsc --noEmit",
-    "build:coverage": "nyc check-coverage --statements 70 --branches 70 --functions 60 --lines 70",
     "autotest": "./node_modules/.bin/_mocha --watch",
     "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "prepublish": "yarn run build",
@@ -36,7 +34,9 @@
     "@babel/register": "^7.6.2",
     "@typescript-eslint/parser": "^2.3.1",
     "babel-eslint": "^7.1.1",
+    "babel-plugin-istanbul": "^5.2.0",
     "chai": "^4.2.0",
+    "cross-env": "^6.0.0",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -46,5 +46,16 @@
     "nyc": "^14.1.1",
     "sinon": "^1.17.7",
     "typescript": "^3.6.3"
+  },
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
   }
 }

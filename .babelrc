@@ -11,5 +11,12 @@
   "plugins": [
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/transform-async-to-generator"
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
 }
