@@ -8,7 +8,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "null-logger": "^1.0.0",
-    "qs": "^6.4.0"
+    "qs": "^6.9.0"
   },
   "files": [
     "lib/*"
@@ -16,10 +16,10 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test nyc npm run spec",
     "spec": "mocha -R spec ./test/test_helper.js test/*.*",
-    "lint": "./node_modules/.bin/eslint src test",
+    "lint": "./node_modules/.bin/eslint 'src/**/*.{ts,js}'",
     "typecheck": "tsc --noEmit",
     "autotest": "./node_modules/.bin/_mocha --watch",
-    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" && tsc",
+    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" && tsc --emitDeclarationOnly",
     "prepublish": "yarn run build",
     "reporter": "nyc --reporter=html yarn run test"
   },
@@ -29,24 +29,32 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
     "@babel/plugin-transform-async-to-generator": "^7.5.0",
+    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@babel/register": "^7.6.2",
     "@types/bunyan": "^1.8.6",
+    "@types/qs": "^6.5.3",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
-    "babel-eslint": "^7.1.1",
+    "babel-eslint": "^10.0.3",
     "babel-plugin-istanbul": "^5.2.0",
     "chai": "^4.2.0",
     "cross-env": "^6.0.0",
     "eslint": "^6.4.0",
     "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-import-resolver-typescript": "^1.1.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-mocha": "^6.1.1",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
+    "prettier": "^1.18.2",
     "sinon": "^1.17.7",
-    "typescript": "^3.6.3"
+    "typescript": "^3.4.1"
   },
   "nyc": {
     "require": [
