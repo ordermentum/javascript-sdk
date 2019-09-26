@@ -1,19 +1,51 @@
-import axios from 'axios';
+import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 import pack from '../package.json';
+import * as Logger from 'bunyan';
 
-export default class Client {
-  constructor({ apiBase = 'https://app.ordermentum.com', timeout = 3000, token, logger }) {
+export interface IClient {
+  logger: Logger;
+  username?: string;
+  token: string;
+  timeout: number;
+  callback?: () => void;
+  apiBase: string;
+};
+
+abstract class Client {
+  constructor({
+    callback = () => {},
+    logger,
+    timeout = 5000,
+    apiBase,
+    token,
+  }: IClient) {
+    this.apiBase = apiBase;
+    this.logger = logger;
+    this.callback = callback;
+    this.adaptor = axios;
+    this.token = token;
+    this.timeout = timeout;
+  }
+  apiBase: string;
+  logger: Logger;
+  timeout: number;
+  callback: () => void;
+  adaptor: AxiosStatic;
+  token: string;
+};
+
+export default class OrdermentumClient extends Client {
+  super({ apiBase = 'https://app.ordermentum.com', timeout = 3000, token, logger }: IClient) {
     this.apiBase = apiBase;
     this.token = token;
     this.logger = logger;
-    this.adapter = axios;
+    this.adaptor = axios;
     this.timeout = timeout;
-    this.instance = this.getInstance();
   }
 
-  getInstance() {
-    return this.adapter.create({
+  get instance() {
+    return this.adaptor.create({
       baseURL: this.apiBase,
       timeout: this.timeout,
       paramsSerializer: params => (
@@ -27,28 +59,28 @@ export default class Client {
     });
   }
 
-  get(...args) {
-    return this.instance.get(...args)
+  get(url: string, params: AxiosRequestConfig) {
+    return this.instance.get(url, params)
     .then(r => r.data);
   }
 
-  post(...args) {
-    return this.instance.post(...args)
+  post(url: string, body: object) {
+    return this.instance.post(url, body)
     .then(r => r.data);
   }
 
-  patch(...args) {
-    return this.instance.patch(...args)
+  patch(url: string, body: object) {
+    return this.instance.patch(url, body)
     .then(r => r.data);
   }
 
-  put(...args) {
-    return this.instance.put(...args)
+  put(url: string, body: object) {
+    return this.instance.put(url, body)
     .then(r => r.data);
   }
 
-  delete(...args) {
-    return this.instance.delete(...args)
+  delete(url: string) {
+    return this.instance.delete(url)
     .then(r => r.data);
   }
 }

@@ -8,68 +8,73 @@ function singleResource(response) {
   return null;
 }
 
+const findAll = ({ defaultFilter, path, client }) => (query) => {
+    const params = Object.assign({}, defaultFilter, query);
+    client.logger.trace('findAll', { path, params });
+    return client.get(path, { params });
+};
+
+const findOne = ({ path, client }) => (query = {}) => {
+  const params = Object.assign({}, {
+    pageSize: 1,
+    pageNo: 1,
+  }, query);
+
+  client.logger.trace('findOne', { path, params });
+  return client.get(path, { params })
+               .then(singleResource);
+};
+
+const findById = ({ path, client }) => (id) => {
+  client.logger.trace('findById', { path, id });
+        return client.get(`${path}/${id}`);
+};
+
+const create = ({ client, path }) => (params = {}) => {
+  client.logger.trace('create', { path, params });
+  return client.post(path, params);
+};
+
+const destroy = ({ client, path }) => (id) => {
+  client.logger.trace('destroy', { path, id });
+  return client.delete(`${path}/${id}`);
+};
+
+const update = ({ client, path }) => (id, params = {}, url = '') => {
+  client.logger.trace('update', { path, id, params });
+  if (url) {
+    return client.put(`${path}/${id}/${url}`, params);
+  }
+  return client.put(`${path}/${id}`, params)
+}
+
+const patch = ({ client, path }) => (id, params= {}, url ='') => {
+  client.logger.trace('patch', { path, id, params });
+  if (url) {
+    return client.patch(`${path}/${id}/${url}`, params);
+  }
+  return client.patch(`${path}/${id}`, params);
+}
+
 export default function resource(path) {
   const defaultFilter = {
     pageSize: 50,
     pageNo: 1,
   };
 
-  return client => (
-    {
+  return client => {
+    return {
       path,
       client,
       defaultFilter,
-
-      findAll(query = {}) {
-        const params = Object.assign({}, defaultFilter, query);
-        client.logger.trace('findAll', { path: this.path, params });
-
-        return client.get(this.path, { params });
-      },
-
-      findOne(query = {}) {
-        const params = Object.assign({}, {
-          pageSize: 1,
-          pageNo: 1,
-        }, query);
-
-        client.logger.trace('findOne', { path: this.path, params });
-        return client.get(this.path, { params })
-                     .then(singleResource);
-      },
-
-      findById(id) {
-        client.logger.trace('findById', { path: this.path, id });
-        return client.get(`${this.path}/${id}`);
-      },
-
-      get(...args) { return this.findbyId(...args); },
-
-      create(params = {}) {
-        client.logger.trace('create', { path: this.path, params });
-        return client.post(this.path, params);
-      },
-
-      destroy(id) {
-        client.logger.trace('destroy', { path: this.path, id });
-        return client.delete(`${this.path}/${id}`);
-      },
-
-      update(id, params = {}, url = '') {
-        client.logger.trace('update', { path: this.path, id, params });
-        if (url) {
-          return client.put(`${this.path}/${id}/${url}`, params);
-        }
-        return client.put(`${this.path}/${id}`, params);
-      },
-
-      patch(id, params = {}, url = '') {
-        client.logger.trace('patch', { path: this.path, id, params });
-        if (url) {
-          return client.patch(`${this.path}/${id}/${url}`, params);
-        }
-        return client.patch(`${this.path}/${id}`, params);
-      },
-    }
-  );
+      findAll: findAll({ client, defaultFilter, path }),
+      findOne: findOne({ client, path }),
+      findById: findById({ client, path }),
+      get: findById({ client, path }),
+      create: create({ client, path}),
+      destroy: destroy({ client, path }),
+      update: update({ client, path }),
+      patch: patch({ client, path }),
+    };
+  }
 }
