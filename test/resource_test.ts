@@ -30,7 +30,6 @@ describe('resource', () => {
   });
 
   describe('findOne', () => {
-
     it('returns a single item', async () => {
       const cat = { name: 'droppo' };
       const getStub = sinon.stub(FAKE_CLIENT, 'get')

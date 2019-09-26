@@ -26,7 +26,7 @@ function createClient({
     integrations,
     properties,
     creditNotes,
-    events
+    events,
   } = resources(client);
 
   return {
@@ -43,7 +43,7 @@ function createClient({
     integrations,
     properties,
     creditNotes,
-    events
+    events,
   };
 }
 

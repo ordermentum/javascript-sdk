@@ -15,7 +15,7 @@ const resources = client => ({
   categories: resource('/v1/categories')(client),
   properties: resource('/v1/properties')(client),
   creditNotes: resource('/v1/credit-notes')(client),
-  events: resource('/v1/events')(client)
+  events: resource('/v1/events')(client),
 });
 
 export default resources;

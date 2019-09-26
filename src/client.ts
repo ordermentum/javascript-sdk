@@ -1,7 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-
-const pack = require('../package');
+import pack from '../package.json';
 
 export default class Client {
   constructor({ apiBase = 'https://app.ordermentum.com', timeout = 3000, token, logger }) {

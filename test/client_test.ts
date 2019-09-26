@@ -16,7 +16,7 @@ describe('Client', () => {
 
   });
 
-  it('unwraps data', async function() {
+  it('unwraps data', async function () {
     this.timeout(10000);
     const apiBase = 'http://jsonip.com';
     const logger = console;
@@ -27,7 +27,7 @@ describe('Client', () => {
     expect(data.status).to.not.exist;
   });
 
-  it('throws on errors', async function() {
+  it('throws on errors', async function () {
     this.timeout(10000);
     const apiBase = 'http://httpstat.us';
     const logger = console;

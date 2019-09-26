@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import ordermentum from '../src/';
+import ordermentum from '../src';
 
 describe('Client', () => {
   it('return an instance', async () => {
