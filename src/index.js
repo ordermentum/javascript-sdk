@@ -24,6 +24,9 @@ function createClient({
     visibilityGroups,
     retailers,
     integrations,
+    properties,
+    creditNotes,
+    events
   } = resources(client);
 
   return {
@@ -38,6 +41,9 @@ function createClient({
     webhooks,
     categories,
     integrations,
+    properties,
+    creditNotes,
+    events
   };
 }
 

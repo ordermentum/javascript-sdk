@@ -55,10 +55,21 @@ export default function resource(path) {
         return client.delete(`${this.path}/${id}`);
       },
 
-      update(id, params = {}) {
+      update(id, params = {}, url = "") {
         client.logger.trace('update', { path: this.path, id, params });
+        if(url) {
+          return client.put(`${this.path}/${id}/${url}`, params);
+        }
         return client.put(`${this.path}/${id}`, params);
       },
+
+      patch(id, params = {}, url = "") {
+        client.logger.trace('patch', { path: this.path, id, params });
+        if(url) {
+          return client.patch(`${this.path}/${id}/${url}`, params);
+        }
+        return client.patch(`${this.path}/${id}`, params);
+      }
     }
   );
 }
