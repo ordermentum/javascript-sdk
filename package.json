@@ -19,7 +19,8 @@
     "lint": "./node_modules/.bin/eslint 'src/**/*.{ts,js}'",
     "typecheck": "tsc --noEmit",
     "autotest": "./node_modules/.bin/_mocha --watch",
-    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" && tsc --emitDeclarationOnly",
+    "clean": "rm -rf lib",
+    "build": "yarn clean && tsc --emitDeclarationOnly && babel src --out-dir lib --extensions \".ts,.tsx\"",
     "prepublish": "yarn run build",
     "reporter": "nyc --reporter=html yarn run test"
   },
