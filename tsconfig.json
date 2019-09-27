@@ -7,7 +7,6 @@
     "module": "commonjs",
     "allowJs": false,
     "checkJs": false,
-    "outDir": "lib",
     "strict": true,
     "alwaysStrict": true,
     "noUnusedLocals": true,
@@ -21,11 +20,11 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationDir": "lib"
+    "emitDeclarationOnly": true, 
+    "declarationDir": "lib"  
   },
   "include": [
-    "src"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
