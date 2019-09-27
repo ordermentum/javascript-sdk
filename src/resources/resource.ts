@@ -2,7 +2,6 @@ function singleResource(response) {
   if (Array.isArray(response.data) && response.data.length > 0) {
     return response.data[0];
   }
-
   return null;
 }
 
