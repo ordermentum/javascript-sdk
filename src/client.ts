@@ -2,7 +2,6 @@ import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 // eslint-disable-next-line import/no-unresolved
 import * as Logger from 'bunyan';
-import pack from '../package.json';
 
 export interface IClient {
   logger: Logger;
@@ -63,7 +62,7 @@ export default class OrdermentumClient extends Client {
       paramsSerializer: params => qs.stringify(params),
       responseType: 'json',
       headers: {
-        'User-Agent': `Ordermentum Client ${pack.version}`,
+        'User-Agent': `Ordermentum Client 1.0.0`,
         Authorization: `Bearer ${this.token}`,
       },
     });

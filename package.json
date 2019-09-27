@@ -20,7 +20,7 @@
     "typecheck": "tsc --noEmit",
     "autotest": "./node_modules/.bin/_mocha --watch",
     "clean": "rm -rf lib",
-    "build": "yarn clean && tsc && babel src --out-dir lib --extensions \".ts,.tsx\"",
+    "build": "yarn clean && babel src --out-dir lib --extensions \".ts,.tsx\" && tsc ",
     "prepublish": "yarn run build",
     "reporter": "nyc --reporter=html yarn run test"
   },
@@ -55,7 +55,7 @@
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "sinon": "^1.17.7",
-    "typescript": "^3.4.1"
+    "typescript": "^3.6.3"
   },
   "nyc": {
     "require": [

@@ -27,6 +27,8 @@ function createClient({
     properties,
     creditNotes,
     events,
+    priceGroups,
+    schedules
   } = resources(client);
 
   return {
@@ -44,6 +46,8 @@ function createClient({
     properties,
     creditNotes,
     events,
+    priceGroups,
+    schedules
   };
 }
 
