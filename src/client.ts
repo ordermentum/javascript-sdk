@@ -69,23 +69,23 @@ export default class OrdermentumClient extends Client {
     });
   }
 
-  get(url: string, params: AxiosRequestConfig) {
+  async get(url: string, params: AxiosRequestConfig) {
     return this.instance.get(url, params).then(r => r.data);
   }
 
-  post(url: string, body: object) {
+  async post(url: string, body: object) {
     return this.instance.post(url, body).then(r => r.data);
   }
 
-  patch(url: string, body: object) {
+  async patch(url: string, body: object) {
     return this.instance.patch(url, body).then(r => r.data);
   }
 
-  put(url: string, body: object) {
+  async put(url: string, body: object) {
     return this.instance.put(url, body).then(r => r.data);
   }
 
-  delete(url: string) {
+  async delete(url: string) {
     return this.instance.delete(url).then(r => r.data);
   }
 }
