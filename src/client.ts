@@ -1,5 +1,6 @@
 import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
 import qs from 'qs';
+// @ts-ignore
 import Logger from 'bunyan';
 
 export interface IClient {
