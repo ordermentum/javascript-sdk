@@ -1,3 +1,4 @@
+import { Resources } from './resources/index';
 import NULL_LOGGER from 'null-logger';
 
 import Client from './client';
@@ -29,7 +30,7 @@ function createClient({
     events,
     priceGroups,
     schedules
-  } = resources(client);
+  }: Resources = resources(client);
 
   return {
     client,
@@ -51,4 +52,5 @@ function createClient({
   };
 }
 
+export type Client = Resources & {client: Client};
 export default createClient;

@@ -1,6 +1,25 @@
-import resource from './resource';
+import Client from '../client';
+import resource, {Resource} from './resource';
 
-const resources = client => ({
+export type Resources = {
+  invoices: Resource
+  orders: Resource
+  purchasers: Resource
+  products: Resource
+  retailers: Resource
+  suppliers: Resource
+  visibilityGroups: Resource
+  priceGroups: Resource
+  schedules: Resource
+  webhooks: Resource
+  integrations: Resource
+  categories: Resource
+  properties: Resource
+  creditNotes: Resource
+  events: Resource
+}
+
+const resources = (client: Client) => ({
   invoices: resource('/v1/invoices')(client),
   orders: resource('/v1/orders')(client),
   purchasers: resource('/v1/purchasers')(client),
