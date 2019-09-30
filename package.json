@@ -1,6 +1,6 @@
 {
   "name": "ordermentum-sdk",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "lib/index.js",
   "repository": "git@github.com:ordermentum/javascript-sdk.git",
   "author": "John D'Agostino <john.dagostino@gmail.com>",
@@ -34,7 +34,6 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@babel/register": "^7.6.2",
-    "@types/bunyan": "^1.8.6",
     "@types/qs": "^6.5.3",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
