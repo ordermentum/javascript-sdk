@@ -1,7 +1,6 @@
 import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
 import qs from 'qs';
-// eslint-disable-next-line import/no-unresolved
-import * as Logger from 'bunyan';
+import Logger from 'bunyan';
 
 export interface IClient {
   logger: Logger;
