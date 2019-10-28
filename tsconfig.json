@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es2017"
+    ],
+    "target": "es2017",
+    "module": "commonjs",
+    "allowJs": false,
+    "checkJs": false,
+    "strict": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "resolveJsonModule": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "declaration": true,
+    "emitDeclarationOnly": true, 
+    "declarationDir": "lib"  
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

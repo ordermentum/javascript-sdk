@@ -1,3 +1,4 @@
+import { Resources } from './resources/index';
 import NULL_LOGGER from 'null-logger';
 
 import Client from './client';
@@ -24,7 +25,12 @@ function createClient({
     visibilityGroups,
     retailers,
     integrations,
-  } = resources(client);
+    properties,
+    creditNotes,
+    events,
+    priceGroups,
+    schedules
+  }: Resources = resources(client);
 
   return {
     client,
@@ -38,7 +44,13 @@ function createClient({
     webhooks,
     categories,
     integrations,
+    properties,
+    creditNotes,
+    events,
+    priceGroups,
+    schedules
   };
 }
 
+export type Client = Resources & {client: Client};
 export default createClient;
