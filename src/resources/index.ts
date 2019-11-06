@@ -1,23 +1,23 @@
 import Client from '../client';
-import resource, {Resource} from './resource';
+import resource, { Resource } from './resource';
 
 export type Resources = {
-  invoices: Resource
-  orders: Resource
-  purchasers: Resource
-  products: Resource
-  retailers: Resource
-  suppliers: Resource
-  visibilityGroups: Resource
-  priceGroups: Resource
-  schedules: Resource
-  webhooks: Resource
-  integrations: Resource
-  categories: Resource
-  properties: Resource
-  creditNotes: Resource
-  events: Resource
-}
+  invoices: Resource;
+  orders: Resource;
+  purchasers: Resource;
+  products: Resource;
+  retailers: Resource;
+  suppliers: Resource;
+  visibilityGroups: Resource;
+  priceGroups: Resource;
+  schedules: Resource;
+  webhooks: Resource;
+  integrations: Resource;
+  categories: Resource;
+  properties: Resource;
+  creditNotes: Resource;
+  events: Resource;
+};
 
 const resources = (client: Client) => ({
   invoices: resource('/v1/invoices')(client),

@@ -1,4 +1,5 @@
 import Client from '../client';
+
 function singleResource(response) {
   if (Array.isArray(response.data) && response.data.length > 0) {
     return response.data[0];
@@ -50,10 +51,10 @@ const patch = ({ client, path }) => (id, params = {}, url = '') => {
   return client.patch(`${path}/${id}`, params);
 };
 
-export type Resource =  {
-  path:  string;
+export type Resource = {
+  path: string;
   client: Client;
-  defaultFilter: { pageSize: number; pageNo: number; };
+  defaultFilter: { pageSize: number; pageNo: number };
   findAll: (query: any) => any;
   findOne: (query?: {}) => any;
   findById: (id: any) => any;
@@ -62,7 +63,7 @@ export type Resource =  {
   destroy: (id: any) => any;
   update: (id: any, params?: {}, url?: string) => any;
   patch: (id: any, params?: {}, url?: string) => any;
-}
+};
 
 export default function resource(path) {
   const defaultFilter = {

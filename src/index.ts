@@ -52,5 +52,5 @@ function createClient({
   };
 }
 
-export type OmSdkClient = Resources & {client: Client};
+export type OrdermentumClient = Resources & { client: Client };
 export default createClient;
