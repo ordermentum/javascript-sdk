@@ -53,7 +53,7 @@
     "mocha": "7.0.0",
     "nyc": "14.1.1",
     "prettier": "1.19.1",
-    "sinon": "8.1.0",
+    "sinon": "8.1.1",
     "typescript": "3.7.5"
   },
   "nyc": {
