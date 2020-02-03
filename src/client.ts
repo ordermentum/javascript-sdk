@@ -9,6 +9,7 @@ export interface IClient {
   timeout: number;
   callback?: () => void;
   apiBase: string;
+  errorInterceptor?: ((error: any) => any) | undefined
 }
 
 abstract class Client {
@@ -18,6 +19,7 @@ abstract class Client {
     timeout = 5000,
     apiBase,
     token,
+    errorInterceptor = undefined
   }: IClient) {
     this.apiBase = apiBase;
     this.logger = logger;
@@ -25,6 +27,7 @@ abstract class Client {
     this.adaptor = axios;
     this.token = token;
     this.timeout = timeout;
+    this.errorInterceptor = errorInterceptor;
   }
 
   apiBase: string;
@@ -38,6 +41,8 @@ abstract class Client {
   adaptor: AxiosStatic;
 
   token: string;
+
+  errorInterceptor: ((error: any) => any) | undefined
 }
 
 export default class OrdermentumClient extends Client {
@@ -46,25 +51,32 @@ export default class OrdermentumClient extends Client {
     timeout = 3000,
     token,
     logger,
+    errorInterceptor
   }: IClient) {
     this.apiBase = apiBase;
     this.token = token;
     this.logger = logger;
     this.adaptor = axios;
     this.timeout = timeout;
+    this.errorInterceptor = errorInterceptor;
   }
 
   get instance() {
-    return this.adaptor.create({
+    const instance =  this.adaptor.create({
       baseURL: this.apiBase,
       timeout: this.timeout,
       paramsSerializer: params => qs.stringify(params),
       responseType: 'json',
       headers: {
-        'User-Agent': `Ordermentum Client 1.0.0`,
-        Authorization: `Bearer ${this.token}`,
+        'User-Agent': `Ordermentum Client 1.0.0`
+        // Authorization: `Bearer ${this.token}`, 
       },
     });
+
+    if(this.errorInterceptor) {
+      instance.interceptors.response.use(undefined, this.errorInterceptor);
+    }
+    return instance;
   }
 
   async get(url: string, params: AxiosRequestConfig) {

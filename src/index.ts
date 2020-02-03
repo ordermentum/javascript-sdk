@@ -9,10 +9,17 @@ function createClient({
   timeout = 3000,
   token,
   logger = NULL_LOGGER,
+  errorInterceptor =  undefined
+} : {
+  apiBase: string;
+  timeout?: number;
+  token: string;
+  logger?: any;
+  errorInterceptor?: ((error: any) => any) | undefined
 }) {
-  const client = new Client({ token, apiBase, timeout, logger });
+  const client = new Client({ token, apiBase, timeout, logger, errorInterceptor });
 
-  logger.info({ token, apiBase, timeout });
+  logger.info({ token, apiBase, timeout, errorInterceptor });
 
   const {
     orders,
