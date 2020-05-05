@@ -34,7 +34,7 @@
     "@babel/preset-env": "7.9.6",
     "@babel/preset-typescript": "7.9.0",
     "@babel/register": "7.9.0",
-    "@types/qs": "6.9.1",
+    "@types/qs": "6.9.2",
     "@typescript-eslint/eslint-plugin": "2.31.0",
     "@typescript-eslint/parser": "2.31.0",
     "babel-eslint": "10.1.0",
