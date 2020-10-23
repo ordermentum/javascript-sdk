@@ -6,7 +6,7 @@
   "author": "John D'Agostino <john.dagostino@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "0.20.0",
+    "axios": "0.21.0",
     "null-logger": "^1.0.0",
     "qs": "^6.9.0"
   },
