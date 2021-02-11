@@ -54,7 +54,7 @@
     "nyc": "14.1.1",
     "prettier": "1.19.1",
     "sinon": "8.1.1",
-    "typescript": "3.9.8"
+    "typescript": "3.9.9"
   },
   "nyc": {
     "require": [
