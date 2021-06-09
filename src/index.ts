@@ -1,7 +1,7 @@
 import { Resources } from './resources/index';
 import NULL_LOGGER from 'null-logger';
 
-import Client from './client';
+import Client, { IClient } from './client';
 import resources from './resources';
 
 function createClient({
@@ -9,8 +9,9 @@ function createClient({
   timeout = 3000,
   token,
   logger = NULL_LOGGER,
-}) {
-  const client = new Client({ token, apiBase, timeout, logger });
+  adaptor,
+}: Pick<IClient, 'apiBase' | 'timeout' | 'token' | 'logger' | 'adaptor'>) {
+  const client = new Client({ token, apiBase, timeout, logger, adaptor });
 
   logger.info({ token, apiBase, timeout });
 
