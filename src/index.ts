@@ -1,8 +1,7 @@
-import { Resources } from './resources/index';
 import NULL_LOGGER from 'null-logger';
+import resources, { Resources } from './resources/index';
 
 import Client, { IClient } from './client';
-import resources from './resources';
 
 function createClient({
   apiBase = 'https://app.ordermentum.com',
@@ -10,7 +9,8 @@ function createClient({
   token,
   logger = NULL_LOGGER,
   adaptor,
-}: Pick<IClient, 'apiBase' | 'timeout' | 'token' | 'logger' | 'adaptor'>) {
+}: Pick<IClient, 'token'> &
+  Partial<Pick<IClient, 'apiBase' | 'timeout' | 'logger' | 'adaptor'>>) {
   const client = new Client({ token, apiBase, timeout, logger, adaptor });
 
   logger.info({ token, apiBase, timeout });
@@ -30,7 +30,7 @@ function createClient({
     creditNotes,
     events,
     priceGroups,
-    schedules
+    schedules,
   }: Resources = resources(client);
 
   return {
@@ -49,7 +49,7 @@ function createClient({
     creditNotes,
     events,
     priceGroups,
-    schedules
+    schedules,
   };
 }
 
