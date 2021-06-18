@@ -9,6 +9,7 @@ export interface IClient {
   timeout: number;
   callback?: () => void;
   apiBase: string;
+  adaptor?: AxiosStatic;
 }
 
 abstract class Client {
@@ -17,12 +18,13 @@ abstract class Client {
     logger,
     timeout = 5000,
     apiBase,
+    adaptor,
     token,
   }: IClient) {
     this.apiBase = apiBase;
     this.logger = logger;
     this.callback = callback;
-    this.adaptor = axios;
+    this.adaptor = adaptor || axios;
     this.token = token;
     this.timeout = timeout;
   }
@@ -46,11 +48,12 @@ export default class OrdermentumClient extends Client {
     timeout = 3000,
     token,
     logger,
+    adaptor
   }: IClient) {
     this.apiBase = apiBase;
     this.token = token;
     this.logger = logger;
-    this.adaptor = axios;
+    this.adaptor = adaptor || axios;
     this.timeout = timeout;
   }
 
