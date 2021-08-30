@@ -48,7 +48,7 @@ export default class OrdermentumClient extends Client {
     timeout = 3000,
     token,
     logger,
-    adaptor
+    adaptor,
   }: IClient) {
     this.apiBase = apiBase;
     this.token = token;
@@ -70,23 +70,23 @@ export default class OrdermentumClient extends Client {
     });
   }
 
-  async get(url: string, params: AxiosRequestConfig) {
-    return this.instance.get(url, params).then(r => r.data);
+  async get<T = any>(url: string, params?: AxiosRequestConfig): Promise<T> {
+    return this.instance.get<T>(url, params).then(r => r.data);
   }
 
-  async post(url: string, body: object) {
-    return this.instance.post(url, body).then(r => r.data);
+  async post<T = any>(url: string, body: object): Promise<T> {
+    return this.instance.post<T>(url, body).then(r => r.data);
   }
 
-  async patch(url: string, body: object) {
-    return this.instance.patch(url, body).then(r => r.data);
+  async patch<T = any>(url: string, body: object): Promise<T> {
+    return this.instance.patch<T>(url, body).then(r => r.data);
   }
 
-  async put(url: string, body: object) {
-    return this.instance.put(url, body).then(r => r.data);
+  async put<T = any>(url: string, body: object): Promise<T> {
+    return this.instance.put<T>(url, body).then(r => r.data);
   }
 
-  async delete(url: string) {
+  async delete<T = any>(url: string): Promise<T> {
     return this.instance.delete(url).then(r => r.data);
   }
 }

@@ -7,35 +7,43 @@ function singleResource(response) {
   return null;
 }
 
+type ResourceMethod = { path: string; client: Client };
+
 const findAll = ({ defaultFilter, path, client }) => query => {
   const params = { ...defaultFilter, ...query };
   client.logger.trace('findAll', { path, params });
   return client.get(path, { params });
 };
 
-const findOne = ({ path, client }) => (query = {}) => {
+const findOne = ({ path, client }: ResourceMethod) => <T = any>(
+  query = {}
+): Promise<T> => {
   const params = { pageSize: 1, pageNo: 1, ...query };
 
   client.logger.trace('findOne', { path, params });
   return client.get(path, { params }).then(singleResource);
 };
 
-const findById = ({ path, client }) => id => {
+const findById = ({ path, client }: ResourceMethod) => id => {
   client.logger.trace('findById', { path, id });
   return client.get(`${path}/${id}`);
 };
 
-const create = ({ client, path }) => (params = {}) => {
+const create = ({ client, path }: ResourceMethod) => (params = {}) => {
   client.logger.trace('create', { path, params });
   return client.post(path, params);
 };
 
-const destroy = ({ client, path }) => id => {
+const destroy = ({ client, path }: ResourceMethod) => id => {
   client.logger.trace('destroy', { path, id });
   return client.delete(`${path}/${id}`);
 };
 
-const update = ({ client, path }) => (id, params = {}, url = '') => {
+const update = ({ client, path }: ResourceMethod) => (
+  id,
+  params = {},
+  url = ''
+) => {
   client.logger.trace('update', { path, id, params });
   if (url) {
     return client.put(`${path}/${id}/${url}`, params);
@@ -43,7 +51,11 @@ const update = ({ client, path }) => (id, params = {}, url = '') => {
   return client.put(`${path}/${id}`, params);
 };
 
-const patch = ({ client, path }) => (id, params = {}, url = '') => {
+const patch = ({ client, path }: ResourceMethod) => (
+  id,
+  params = {},
+  url = ''
+) => {
   client.logger.trace('patch', { path, id, params });
   if (url) {
     return client.patch(`${path}/${id}/${url}`, params);
@@ -55,14 +67,14 @@ export type Resource = {
   path: string;
   client: Client;
   defaultFilter: { pageSize: number; pageNo: number };
-  findAll: (query: any) => any;
-  findOne: (query?: {}) => any;
-  findById: (id: any) => any;
-  get: (id: any) => any;
-  create: (params?: {}) => any;
-  destroy: (id: any) => any;
-  update: (id: any, params?: {}, url?: string) => any;
-  patch: (id: any, params?: {}, url?: string) => any;
+  findAll: <T = any>(query: any) => Promise<T>;
+  findOne: <T = any>(query?: {}) => Promise<T>;
+  findById: <T = any>(id: any) => Promise<T>;
+  get: <T = any>(id: any) => Promise<T>;
+  create: <T = any>(params?: {}) => Promise<T>;
+  destroy: <T = any>(id: any) => Promise<T>;
+  update: <T = any>(id: any, params?: {}, url?: string) => Promise<T>;
+  patch: <T = any>(id: any, params?: {}, url?: string) => Promise<T>;
 };
 
 export default function resource(path) {

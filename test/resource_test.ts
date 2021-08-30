@@ -58,7 +58,7 @@ describe('resource', () => {
     const postStub = sinon
       .stub(FAKE_CLIENT, 'post')
       .returns(new Promise(resolve => resolve(cat)));
-    const response = await cats.create(cat);
+    const response = await cats.create<typeof cat>(cat);
     expect(postStub.called).to.be.equal(true);
     expect(response).to.deep.equal(cat);
     postStub.restore();
@@ -69,7 +69,7 @@ describe('resource', () => {
     const putStub = sinon
       .stub(FAKE_CLIENT, 'put')
       .returns(new Promise(resolve => resolve(cat)));
-    const response = await cats.update(cat);
+    const response = await cats.update<typeof cat>(cat);
     expect(putStub.called).to.be.equal(true);
     expect(response).to.deep.equal(cat);
     putStub.restore();
