@@ -2,6 +2,9 @@ import axios, { AxiosStatic, AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 import Logger from './definitions/logger';
 
+let isNode = true;
+if (globalThis && 'window' in globalThis) isNode = false;
+
 export interface IClient {
   logger: Logger;
   username?: string;
@@ -58,16 +61,25 @@ export default class OrdermentumClient extends Client {
   }
 
   get instance() {
+    const headers = {
+      Authorization: `Bearer ${this.token}`,
+    };
+
+    if (this.userAgent) {
+      headers['User-Agent'] = this.userAgent;
+    }
+
     return this.adaptor.create({
       baseURL: this.apiBase,
       timeout: this.timeout,
       paramsSerializer: params => qs.stringify(params),
       responseType: 'json',
-      headers: {
-        'User-Agent': `Ordermentum Client 1.0.0`,
-        Authorization: `Bearer ${this.token}`,
-      },
+      headers,
     });
+  }
+
+  get userAgent() {
+    return isNode ? `Ordermentum Client 1.1.0` : undefined;
   }
 
   async get<T = any>(url: string, params?: AxiosRequestConfig): Promise<T> {

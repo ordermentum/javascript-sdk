@@ -9,7 +9,33 @@ function singleResource(response) {
 
 type ResourceMethod = { path: string; client: Client };
 
-const findAll = ({ defaultFilter, path, client }) => query => {
+/**
+ * Generic type for responses from Query controllers (i.e. any controller that
+ * uses the QueryBuilder to form the response).
+ *
+ * @argument T type of each element of data being returned in the
+ *  data array.
+ */
+export type QueryResponse<T> = {
+  meta: {
+    totalResults: number;
+    totalPages: number;
+    pageSize: number;
+    pageNo: number;
+  };
+  links: {
+    self: string;
+    first: string;
+    prev?: string;
+    next?: string;
+    last: string;
+  };
+  data: T[];
+};
+
+const findAll = ({ defaultFilter, path, client }) => <T = any>(
+  query
+): Promise<QueryResponse<T>> => {
   const params = { ...defaultFilter, ...query };
   client.logger.trace('findAll', { path, params });
   return client.get(path, { params });
@@ -63,27 +89,27 @@ const patch = ({ client, path }: ResourceMethod) => (
   return client.patch(`${path}/${id}`, params);
 };
 
-export type Resource = {
+export type Resource<L = any, C = any, U = any, R = any> = {
   path: string;
   client: Client;
   defaultFilter: { pageSize: number; pageNo: number };
-  findAll: <T = any>(query: any) => Promise<T>;
-  findOne: <T = any>(query?: {}) => Promise<T>;
-  findById: <T = any>(id: any) => Promise<T>;
-  get: <T = any>(id: any) => Promise<T>;
-  create: <T = any>(params?: {}) => Promise<T>;
-  destroy: <T = any>(id: any) => Promise<T>;
-  update: <T = any>(id: any, params?: {}, url?: string) => Promise<T>;
-  patch: <T = any>(id: any, params?: {}, url?: string) => Promise<T>;
+  findAll: (query: any) => Promise<QueryResponse<L>>;
+  findOne: (query?: any) => Promise<L>;
+  findById: (id: string) => Promise<R>;
+  get: (id: string) => Promise<R>;
+  create: (params?: C) => Promise<R>;
+  destroy: (id: string) => Promise<any>;
+  update: (id: string, params?: U, url?: string) => Promise<R>;
+  patch: (id: string, params?: U, url?: string) => Promise<R>;
 };
 
-export default function resource(path) {
+export default function resource<L = any, C = any, U = any, R = any>(path) {
   const defaultFilter = {
     pageSize: 50,
     pageNo: 1,
   };
 
-  return (client: Client): Resource => {
+  return (client: Client): Resource<L, C, U, R> => {
     return {
       path,
       client,
