@@ -37,7 +37,7 @@
     "@types/qs": "6.9.7",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
-    "babel-eslint": "10.1.0",
+    "@babel/eslint-parser": "7.11.0",
     "babel-plugin-istanbul": "5.2.0",
     "caniuse-lite": "1.0.30001286",
     "chai": "4.3.4",
