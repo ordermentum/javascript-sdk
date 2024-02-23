@@ -1,4 +1,24 @@
 {
-  "presets": ["es2015", "stage-1"],
-  "plugins": ["transform-async-to-generator", "transform-flow-strip-types"],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        }
+      }
+    ],
+    "@babel/typescript"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/transform-async-to-generator"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
 }
