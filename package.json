@@ -1,49 +1,71 @@
 {
   "name": "ordermentum-sdk",
-  "version": "0.2.12",
+  "version": "1.1.0",
   "main": "lib/index.js",
   "repository": "git@github.com:ordermentum/javascript-sdk.git",
-  "author": "John D'Agostino <john.dagostino@gmail.com>",
+  "author": "John D'Agostino <john@ordermentum.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.15.3",
-    "babel-runtime": "^6.22.0",
+    "axios": "0.28.1",
     "null-logger": "^1.0.0",
-    "qs": "^6.4.0"
+    "qs": "^6.9.0"
   },
   "files": [
     "lib/*"
   ],
   "scripts": {
-    "test": "NODE_ENV=test nyc npm run spec",
-    "spec": "./node_modules/.bin/_mocha -R spec ./test/test_helper.js --compilers js:babel-core/register --recursive test/**/*",
-    "lint": "./node_modules/.bin/eslint src test",
-    "build:coverage": "nyc check-coverage --statements 70 --branches 70 --functions 60 --lines 70",
+    "test": "cross-env NODE_ENV=test nyc npm run spec",
+    "spec": "mocha -R spec ./test/test_helper.js test/*.*",
+    "lint": "./node_modules/.bin/eslint 'src/**/*.{ts,js}'",
+    "typecheck": "tsc --noEmit",
     "autotest": "./node_modules/.bin/_mocha --watch",
-    "build": "babel src --out-dir lib",
+    "clean": "rm -rf lib",
+    "build": "yarn clean && babel src --out-dir lib --extensions \".ts,.tsx\" && tsc ",
     "prepublish": "yarn run build",
     "reporter": "nyc --reporter=html yarn run test"
   },
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-core": "^6.22.1",
-    "babel-eslint": "^7.1.1",
-    "babel-istanbul": "^0.12.1",
-    "babel-plugin-transform-async-to-generator": "^6.22.0",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-1": "^6.22.0",
-    "babel-register": "^6.22.0",
-    "chai": "^3.5.0",
-    "eslint": "^3.15.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.9.0",
-    "flow-bin": "^0.38.0",
-    "mocha": "^3.2.0",
-    "nyc": "^10.1.2",
-    "sinon": "^1.17.7"
+    "@babel/cli": "7.24.8",
+    "@babel/core": "7.24.9",
+    "@babel/plugin-proposal-class-properties": "7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "7.20.7",
+    "@babel/plugin-transform-async-to-generator": "7.24.7",
+    "@babel/polyfill": "7.12.1",
+    "@babel/preset-env": "7.24.8",
+    "@babel/preset-typescript": "7.24.7",
+    "@babel/register": "7.24.6",
+    "@types/qs": "6.9.15",
+    "@typescript-eslint/eslint-plugin": "2.34.0",
+    "@typescript-eslint/parser": "2.34.0",
+    "@babel/eslint-parser": "7.24.8",
+    "babel-plugin-istanbul": "5.2.0",
+    "caniuse-lite": "1.0.30001640",
+    "chai": "4.4.1",
+    "cross-env": "6.0.3",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-prettier": "6.15.0",
+    "eslint-import-resolver-typescript": "2.7.1",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jsx-a11y": "6.9.0",
+    "eslint-plugin-mocha": "6.3.0",
+    "eslint-plugin-prettier": "3.4.1",
+    "eslint-plugin-react": "7.34.3",
+    "mocha": "7.2.0",
+    "nyc": "14.1.1",
+    "prettier": "1.19.1",
+    "sinon": "8.1.1",
+    "typescript": "3.9.10"
+  },
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false
   }
 }
