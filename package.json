@@ -42,7 +42,7 @@
     "caniuse-lite": "1.0.30001640",
     "chai": "4.4.1",
     "cross-env": "6.0.3",
-    "eslint": "6.8.0",
+    "eslint": "9.13.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "6.15.0",
     "eslint-import-resolver-typescript": "2.7.1",
