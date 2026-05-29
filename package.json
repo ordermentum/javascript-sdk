@@ -40,7 +40,7 @@
     "@babel/eslint-parser": "7.28.6",
     "babel-plugin-istanbul": "5.2.0",
     "caniuse-lite": "1.0.30001792",
-    "chai": "4.5.0",
+    "chai": "6.2.2",
     "cross-env": "6.0.3",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.2.1",
