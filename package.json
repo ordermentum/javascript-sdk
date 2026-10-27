@@ -38,7 +38,7 @@
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "@babel/eslint-parser": "7.28.6",
-    "babel-plugin-istanbul": "5.2.0",
+    "babel-plugin-istanbul": "8.0.0",
     "caniuse-lite": "1.0.30001792",
     "chai": "4.5.0",
     "cross-env": "6.0.3",
